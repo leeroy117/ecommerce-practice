@@ -1,18 +1,14 @@
 import {
-  createBrowserRouter,
   RouterProvider,
+  createHashRouter,
+  Navigate
 } from "react-router-dom";
 import {
   RecoilRoot,
 } from 'recoil';
 
-// import { Home } from "./pages/Home";
-// import { MyAccount } from "./pages/MyAccount";
-// import { MyOrder } from "./pages/MyOrder";
-// import { MyOrders } from "./pages/MyOrders";
 import { SignIn } from "./pages/SignIn";
 import  Layout  from "./Components/Layout";
-// import { NotFound } from "./pages/NotFound";
 import { lazy, Suspense } from "react";
 
 function App() {
@@ -24,13 +20,18 @@ function App() {
   const NotFound= lazy(() => import('./pages/NotFound').then(m => ({default: m.NotFound})));
   const ProductDetail = lazy(() => import('./pages/ProductDetail').then());
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: (
         <Layout />
       ),
       children: [
+        {
+          index: true,
+          path: "/",
+          element: <Navigate to={`/all`}  />,
+        },
         {
           path: "/:category",
           element: <Home />,
@@ -68,7 +69,8 @@ function App() {
     future: {
       v7_normalizeFormMethod: true
     }
-  });
+  }
+);
 
   return (
     <>

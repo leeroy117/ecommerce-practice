@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { cartItemsState, productsListState } from "../../state/globalState";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IProduct } from "../../interfaces/product";
 import { Rating, Star } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
@@ -21,13 +21,13 @@ function ProducDetail() {
 
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         if(id){
             const parsedId = parseInt(id); 
             const foundProduct = products.find(p => p.id === parsedId);
             setProduct(foundProduct);
         }
-    }, [id])
+    // }, [])
 
     const handlePlusQuantity = () => {
         if(product){
